@@ -1,19 +1,24 @@
-package com.atguigu;
+package com.atguigu.linkedlist;
 
-import java.io.PrintStream;
 import java.util.Stack;
 
 public class SingleLinkedListDemo {
     public static void main(String[] args) {
         //进行测试
         //先创建节点
-        HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
+        HeroNode hero1 = new HeroNode(14, "宋江", "及时雨");
         HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
-        HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
-        HeroNode hero4 = new HeroNode(4, "林冲", "豹子头");
+        HeroNode hero3 = new HeroNode(32, "吴用", "智多星");
+        HeroNode hero4 = new HeroNode(1, "林冲", "豹子头");
+
+        HeroNode hero5 = new HeroNode(44, "宋江", "及时雨");
+        HeroNode hero6 = new HeroNode(3, "卢俊义", "玉麒麟");
+        HeroNode hero7 = new HeroNode(155, "吴用", "智多星");
+        HeroNode hero8 = new HeroNode(89, "林冲", "豹子头");
 
         //创建链表
         SingleLinkedList singleLinkedList = new SingleLinkedList();
+        SingleLinkedList singleLinkedList2 = new SingleLinkedList();
         //加入
 //        singleLinkedList.add(hero1);
 //        singleLinkedList.add(hero4);
@@ -25,6 +30,28 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero4);
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.addByOrder(hero3);
+
+        singleLinkedList2.addByOrder(hero5);
+        singleLinkedList2.addByOrder(hero6);
+        singleLinkedList2.addByOrder(hero7);
+        singleLinkedList2.addByOrder(hero8);
+        System.out.println("第一个链表");
+        singleLinkedList.list();
+        System.out.println("第二个链表");
+        singleLinkedList2.list();
+        System.out.println("合并链表后");
+//        combineTwoLinkedLists(singleLinkedList.getHead(), singleLinkedList2.getHead()).va;
+//        combineTwoLinkedLists.list();
+        HeroNode heroNode = combineTwoLinkedLists3(singleLinkedList.getHead().next, singleLinkedList2.getHead().next);
+        HeroNode curr = heroNode;
+        while (true) {
+            if (curr == null){
+                break;
+            }
+            System.out.println(curr);
+            curr = curr.next;
+        }
+
 
         //显示一把
 //        singleLinkedList.list();
@@ -43,12 +70,86 @@ public class SingleLinkedListDemo {
 //
 //        //测试一下看看是否得到了倒数第k个节点
 //        System.out.println("倒数第k个节点是=" + findLastIndexNode(singleLinkedList.getHead(), 5));
-        System.out.println("==========反转后=============");
+//        System.out.println("==========反转后=============");
 //        SingleLinkedListDemo.reverseLinkedList(singleLinkedList.getHead());
 //        singleLinkedList.list();
 
-        System.out.println("==========逆序打印=============");
-        SingleLinkedListDemo.printReverse(singleLinkedList.getHead());
+//        System.out.println("==========逆序打印=============");
+//        SingleLinkedListDemo.printReverse(singleLinkedList.getHead());
+
+    }
+
+    @SuppressWarnings({"all"})
+    public static HeroNode combineTwoLinkedLists3(HeroNode head1, HeroNode head2) {
+        HeroNode newHeroNode = new HeroNode(0, "", "");
+        HeroNode cur = newHeroNode;
+        while(true) {
+            if(head1 == null || head2 == null) {
+                break;
+            }
+            if(head1.no < head2.no) {
+                cur.next = head1;
+                head1 = head1.next;
+            }else {
+                cur.next = head2;
+                head2 = head2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = head1 == null ? head2 : head1;
+        return newHeroNode.next;
+
+    }
+
+    public static HeroNode combineTwoLinkedLists2(HeroNode head1, HeroNode head2) {
+        if(head1 == null) {
+            return head2;
+        }else if(head2 == null) {
+            return head1;
+        }
+
+        if(head1.no < head2.no) {
+            head1.next = combineTwoLinkedLists2(head1.next, head2);
+            return head1;
+        }else {
+            head2.next = combineTwoLinkedLists2(head1, head2.next);
+            return head2;
+        }
+
+    }
+
+
+    @SuppressWarnings({"all"})
+    public static SingleLinkedList combineTwoLinkedLists(HeroNode head1, HeroNode head2) {
+
+        SingleLinkedList singleLinkedList = new SingleLinkedList();
+        HeroNode curr1 = head1.next;
+        HeroNode curr2 = head2.next;
+
+        while (true) {
+            if(curr1 == null) {
+                break;
+            }
+            HeroNode temp = new HeroNode(0, "", "");
+            temp.name = curr1.name;
+            temp.no = curr1.no;
+            temp.nickname = curr1.nickname;
+            singleLinkedList.addByOrder(temp);
+            curr1 = curr1.next;
+        }
+
+        while (true) {
+            if(curr2 == null) {
+                break;
+            }
+            HeroNode temp = new HeroNode(0, "", "");
+            temp.name = curr2.name;
+            temp.no = curr2.no;
+            temp.nickname = curr2.nickname;
+            singleLinkedList.addByOrder(temp);
+            curr2 = curr2.next;
+        }
+        return singleLinkedList;
 
     }
 
@@ -91,8 +192,6 @@ public class SingleLinkedListDemo {
             heroNodes.add(cur);
             cur = cur.next;
         }
-
-
         while (true) {
             if(heroNodes.isEmpty()){
                 break;

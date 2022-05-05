@@ -17,6 +17,7 @@ public class Calculator {
         int oper = 0;
         int res = 0;
         char ch = ' '; //将每次扫描到的char保存到ch
+        String number = "";
         //开始用while循环的扫描expression
         while(true) {
             //依次得到expression 的每一个字符
@@ -45,8 +46,18 @@ public class Calculator {
                     //如果为空直接如栈。。
                     operStack.push(ch);
                 }
-            }else {//如果是数，则直接入数栈
-                numStack.push(ch - 48); //? "1+3" '1' => 1
+            }else {//如果是数，看一下下一个char是不是数字
+//                numStack.push(ch - 48); //? "1+3" '1' => 1
+                number += ch;
+                if(!(index == expression.length() - 1)) {
+                    if (operStack.isOper(expression.substring(index + 1, index + 2).charAt(0))) {
+                        numStack.push(Integer.parseInt(number));
+                        number = "";
+                    }
+                }else {
+                    numStack.push(Integer.parseInt(number));
+                }
+
             }
             //让index + 1，并判断是否扫描到expression最后
             index++;

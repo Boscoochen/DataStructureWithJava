@@ -14,17 +14,21 @@ public class PolandNotation {
         //1。1+((2+3)*4)-5 转成 1 2 3 + 4 * + 5 -
         //2. 因为直接对str 进行操作，不方便，因此 先将 "1+((2+3)*4)-5" => 中缀的表达式放到List
         //   即 "1+((2+3)*4)-5" =》 ArrayList [1,+,(,(,2,+,3,),*,4,),-,5]
+        //3. 将得到的中缀表达式对应的List =》 后缀表达式对应的list
+        //   即ArrayList [1,+,(,(,2,+,3,),*,4,),-,5] => ArrayList [1,2,3,+,4,*,+,5,-]
         System.out.println("=========中缀表达式转后缀表达式=========");
         String expression = "1+((2+3)*4)-5";
         List<String> infixExpressionList = toInfixExpressionList(expression);
         System.out.println(infixExpressionList);
-
+        List<String> parseSuffixExpressionList = parseSuffixExpressionList(infixExpressionList);
+        System.out.println(parseSuffixExpressionList);
         System.out.println("======逆波兰表达式======");
         //先定义给逆波兰表达式
         //（30+4）x5-6 =》"30 4 + 5 * 6 -"
         // 4 * 5 - 8 + 60 + 8 / 2 => 4 5 * 8 - 60 + 8 2 / + => 76
         //说明为了方便， 逆波兰表达式 的数字和符号使用空格隔开
         String suffixExpression = "4 5 * 8 - 60 + 8 2 / +";
+
 
         //思路
         //1。先将 "3 4 + 5 x 6 -  " =》 放到ArrayList中
@@ -37,6 +41,66 @@ public class PolandNotation {
 
 
     }
+
+    /*
+    1) 初始化两个栈:运算符栈 s1 和储存中间结果的栈 s2;
+    2) 从左至右扫描中缀表达式;
+    3) 遇到操作数时，将其压 s2;
+    4) 遇到运算符时，比较其与 s1 栈顶运算符的优先级:
+        1.如果 s1 为空，或栈顶运算符为左括号“(”，则直接将此运算符入栈;
+        2.否则，若优先级比栈顶运算符的高，也将运算符压入 s1;
+        3.否则，将 s1 栈顶的运算符弹出并压入到 s2 中，再次转到(4-1)与 s1 中新的栈顶运算符相比较;
+    5) 遇到括号时:(1) 如果是左括号“(”，则直接压入 s1
+                (2) 如果是右括号“)”，则依次弹出 s1 栈顶的运算符，
+                    并压入 s2，直到遇到左括号为止，此时将这一对括号丢弃
+    6) 重复步骤 2 至 5，直到表达式的最右边
+    7) 将 s1 中剩余的运算符依次弹出并压入 s2
+    8) 依次弹出 s2 中的元素并输出，结果的逆序即为中缀表达式对应的后缀表达式
+     */
+
+
+    //即ArrayList [1,+,(,(,2,+,3,),*,4,),-,5] => ArrayList [1,2,3,+,4,*,+,5,-]
+    //方法： 将得到的中缀表达式对应的List =》 后缀表达式对应的list
+    public static List<String> parseSuffixExpressionList(List<String> ls) {
+        //定义两个栈
+        Stack<String> s1 = new Stack<>(); //符号栈
+        //说明： 因为s2这个栈，在整个转换过程中，没有pop操作，而且后面我们还需要逆序输出
+        //因此比较麻烦，这里我们就不用Stack<String>直接使用List<String> s2
+        ArrayList<String> s2 = new ArrayList<>(); // 储存中间结果的Lists2
+
+        //遍历ls
+        for(String item : ls) {
+            //如果是一个数，加入s2
+            if(item.matches("\\d+")) {
+                s2.add(item);
+            } else if (item.equals("(")) {
+                s1.push(item);
+            } else if (item.equals(")")) {
+                //如果是右括号“)”，则依次弹出 s1 栈顶的运算符，
+                //并压入 s2，直到遇到左括号为止，此时将这一对括号丢弃
+                while (!s1.peek().equals("(")){
+                    s2.add(s1.pop());
+                }
+                s1.pop(); //!!! 将 （ 弹出s1栈， 消除小括号
+            } else {
+                //当item的优先级小于等于s1栈顶运算符，将s1栈顶的运算符弹出并加入到s2，再次转到（4.1）于s1中新的栈顶运算符相比较
+                //方法： 缺少一个比较优先级高低的方法
+                while(s1.size() != 0 && Operation.getValue(item) <= Operation.getValue(s1.peek())) {
+                    s2.add(s1.pop());
+                }
+                //还需要将item压入栈
+                s1.push(item);
+            }
+        }
+
+        //将s1中剩余的运算符依次弹出并加入s2
+        while(s1.size() != 0) {
+            s2.add(s1.pop());
+        }
+
+        return s2; //因为是存放到List， 因此按顺序输出就是对应的后缀表达式对应的List
+    }
+
 
     //方法： 将 中缀表达式转成对应的List
     public static List<String> toInfixExpressionList(String s) {
@@ -118,3 +182,36 @@ public class PolandNotation {
         return Integer.parseInt(stack.pop());
     }
 }
+
+//编写一个类 Operation 可以返回一个运算符 对应的优先级
+@SuppressWarnings({"all"})
+class Operation {
+    private static int ADD = 1;
+    private static int SUB = 1;
+    private static int MUL = 2;
+    private static int DIV = 2;
+
+    //写一个方法，返回对应的优先级数字
+    public static int getValue(String operation) {
+        int result = 0;
+        switch (operation) {
+            case "+":
+                result = ADD;
+                break;
+            case "-":
+                result = SUB;
+                break;
+            case "*":
+                result = MUL;
+                break;
+            case "/":
+                result = DIV;
+                break;
+            default:
+                System.out.println("不存在该运算符");
+                break;
+        }
+        return result;
+    }
+}
+

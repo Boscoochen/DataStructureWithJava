@@ -21,6 +21,9 @@ public class MiGong {
         //设置挡板
         map[3][1] = 1;
         map[3][2] = 1;
+        //再加两个挡板测试回溯
+        map[1][2] = 1;
+        map[2][2] = 1;
 
         //输出地图
         for (int i = 0; i < 8; i++) {
@@ -35,6 +38,7 @@ public class MiGong {
         }else {
             System.out.println("没有找到路");
         }
+        //输出新的地图， 小球走过， 并标识过的地图
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
                 System.out.print(map[i][j] + " ");
@@ -67,11 +71,11 @@ public class MiGong {
                 map[i][j] = 2; //假定该点是可以走通
                 if(setWay(map, i+1, j)) { //向下走
                     return true;
-                }else if(setWay(map, i, j+1)) {
+                }else if(setWay(map, i, j+1)) { //向右走
                     return true;
-                }else if(setWay(map, i-1, j)) {
+                }else if(setWay(map, i-1, j)) { //向上走
                     return true;
-                }else if(setWay(map, i, j-1)) {
+                }else if(setWay(map, i, j-1)) { //向左走
                     return true;
                 }else {
                     map[i][j] = 3;

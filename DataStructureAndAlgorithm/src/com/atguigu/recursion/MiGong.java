@@ -22,8 +22,8 @@ public class MiGong {
         map[3][1] = 1;
         map[3][2] = 1;
         //再加两个挡板测试回溯
-        map[1][2] = 1;
-        map[2][2] = 1;
+//        map[1][2] = 1;
+//        map[2][2] = 1;
 
         //输出地图
         for (int i = 0; i < 8; i++) {
@@ -33,7 +33,8 @@ public class MiGong {
             System.out.println();
         }
 
-        if (setWay(map,1,1)) {
+        //策略
+        if (setWay2(map,1,1)) {
             System.out.println("找到路了");
         }else {
             System.out.println("没有找到路");
@@ -45,7 +46,6 @@ public class MiGong {
             }
             System.out.println();
         }
-
     }
 
     //使用递归回溯来给小球找路
@@ -76,6 +76,31 @@ public class MiGong {
                 }else if(setWay(map, i-1, j)) { //向上走
                     return true;
                 }else if(setWay(map, i, j-1)) { //向左走
+                    return true;
+                }else {
+                    map[i][j] = 3;
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    //修改找路策略， 上右下左
+    public static boolean setWay2(int[][] map, int i, int j) {
+        if(map[6][5] == 2) { //通路已经找到ok
+            return true;
+        }else {
+            if(map[i][j] == 0) { //如果当前这个点还没有走过
+                //按照策略 上右下左
+                map[i][j] = 2; //假定该点是可以走通
+                if(setWay2(map, i-1, j)) { //向上走
+                    return true;
+                }else if(setWay2(map, i, j+1)) { //向右走
+                    return true;
+                }else if(setWay2(map, i+1, j)) { //向下走
+                    return true;
+                }else if(setWay2(map, i, j-1)) { //向左走
                     return true;
                 }else {
                     map[i][j] = 3;

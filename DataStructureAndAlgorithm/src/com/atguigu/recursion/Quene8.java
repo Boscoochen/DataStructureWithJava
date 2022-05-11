@@ -29,6 +29,7 @@ public class Quene8 {
         return true;
     }
 
+
     //写一个方法， 可以将皇后摆放的位置输出
     private void print() {
         for(int i = 0; i < array.length; i++) {

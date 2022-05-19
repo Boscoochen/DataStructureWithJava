@@ -1,12 +1,25 @@
 package com.atguigu.sort;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class SelectSort {
     public static void main(String[] args) {
-        int[] arr = {101, 34, 119, 1, -1, 90, 123};
+//        int[] arr = {101, 34, 119, 1, -1, 90, 123};
+        int[] arr = new int[80000];
+        for (int i = 0; i < 80000; i++) {
+            arr[i] = (int)(Math.random() * 8000000);
+        }
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date1str = simpleDateFormat.format(date);
+        System.out.println(date1str);
         selectSort(arr);
+        Date date2 = new Date();
+        String date2str = simpleDateFormat.format(date2);
+        System.out.println(date2str);
     }
 
     public static void selectSort(int[] arr) {
@@ -24,7 +37,7 @@ public class SelectSort {
                 arr[minIndex] = arr[i];
                 arr[i] = min;
             }
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
         }
 //        int minIndex = 0;
 //        int min = arr[0];

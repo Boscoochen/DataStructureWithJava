@@ -1,11 +1,24 @@
 package com.atguigu.sort;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class ShellSort {
     public static void main(String[] args) {
-        int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
-        shellSort(arr);
+//        int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
+        int[] arr = new int[80000];
+        for (int i = 0; i < 80000; i++) {
+            arr[i] = (int)(Math.random() * 8000000);
+        }
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date1str = simpleDateFormat.format(date);
+        System.out.println(date1str);
+        shellSort2(arr);
+        Date date2 = new Date();
+        String date2str = simpleDateFormat.format(date2);
+        System.out.println(date2str);
     }
 
     public static void shellSort(int[] arr) {
@@ -20,7 +33,7 @@ public class ShellSort {
                     }
                 }
             }
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
         }
 
 //        int temp = 0;
@@ -58,4 +71,21 @@ public class ShellSort {
 //        }
 //        System.out.println(Arrays.toString(arr));
     }
+    public static void shellSort2(int[] arr) {
+        for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+            for(int i = gap; i < arr.length; i++) {
+                int j = i;
+                int temp = arr[j];
+                if(arr[j] < arr[j - gap]) {
+                    while (j - gap >= 0 && temp < arr[j - gap]) {
+                        arr[j] = arr[j-gap];
+                        j-=gap;
+                    }
+                    arr[j] = temp;
+                }
+            }
+//        System.out.println(Arrays.toString(arr));
+        }
+    }
+
 }

@@ -1,11 +1,24 @@
 package com.atguigu.sort;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class RadixSort {
     public static void main(String[] args) {
-        int arr[] = {53, 3, 542, 748, 14, 214};
+//        int arr[] = {53, 3, 542, 748, 14, 214};
+        int[] arr = new int[800000];
+        for (int i = 0; i < 800000; i++) {
+            arr[i] = (int)(Math.random() * 8000000);
+        }
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date1str = simpleDateFormat.format(date);
+        System.out.println(date1str);
         radixSort(arr);
+        Date date2 = new Date();
+        String date2str = simpleDateFormat.format(date2);
+        System.out.println(date2str);
     }
 
 
@@ -41,7 +54,7 @@ public class RadixSort {
                 }
                 bucketElementCount[k] = 0;
             }
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
         }
 
 //        //第一轮

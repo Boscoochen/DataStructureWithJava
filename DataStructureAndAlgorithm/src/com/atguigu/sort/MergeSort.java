@@ -6,22 +6,22 @@ import java.util.Date;
 
 public class MergeSort {
     public static void main(String[] args) {
-//        int arr[] = {8, 4, 5, 7, 1, 3, 6, 2};
-//        int temp[] = new int[arr.length];
-        int[] arr = new int[8000000];
+        int arr[] = {8, 4, 5, 7, 1, 3, 6, 2};
         int temp[] = new int[arr.length];
-        for (int i = 0; i < 8000000; i++) {
-            arr[i] = (int)(Math.random() * 8000000);
-        }
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String date1str = simpleDateFormat.format(date);
-        System.out.println(date1str);
+//        int[] arr = new int[8000000];
+//        int temp[] = new int[arr.length];
+//        for (int i = 0; i < 8000000; i++) {
+//            arr[i] = (int)(Math.random() * 8000000);
+//        }
+//        Date date = new Date();
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String date1str = simpleDateFormat.format(date);
+//        System.out.println(date1str);
         mergeSort(arr, 0, arr.length - 1, temp);
 //        System.out.println(Arrays.toString(arr));
-        Date date2 = new Date();
-        String date2str = simpleDateFormat.format(date2);
-        System.out.println(date2str);
+//        Date date2 = new Date();
+//        String date2str = simpleDateFormat.format(date2);
+//        System.out.println(date2str);
     }
 
     public static void mergeSort(int[] arr, int left, int right, int[] temp) {

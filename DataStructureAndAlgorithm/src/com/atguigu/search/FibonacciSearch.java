@@ -6,7 +6,7 @@ public class FibonacciSearch {
     public static int maxSize = 20;
     public static void main(String[] args) {
         int[] arr = {1, 8, 10, 89, 1000, 1234};
-        System.out.println(fibSearch(arr, 1));
+        System.out.println(fibSearch(arr, 1235));
     }
 
     public static int[] fib() {

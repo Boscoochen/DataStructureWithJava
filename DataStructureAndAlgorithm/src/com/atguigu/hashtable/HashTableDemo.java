@@ -12,6 +12,7 @@ public class HashTableDemo {
             System.out.println("add: 添加雇员");
             System.out.println("list: 显示雇员");
             System.out.println("find: 查找雇员");
+            System.out.println("delete: 删除雇员");
             System.out.println("exit: 退出系统");
 
             key = scanner.next();
@@ -31,6 +32,11 @@ public class HashTableDemo {
                     System.out.println("输入查找的id");
                     int searchId = scanner.nextInt();
                     hashTable.findEmpById(searchId);
+                    break;
+                case "delete":
+                    System.out.println("输入删除的id");
+                    int deleteId = scanner.nextInt();
+                    hashTable.deleteEmpById(deleteId);
                     break;
                 case "exit":
                     scanner.close();
@@ -79,6 +85,11 @@ class HashTable {
             System.out.println("在哈希表中， 没有找到该雇员");
         }
     }
+
+    public void deleteEmpById(int id) {
+        int empLinkedListNo = hashFun(id);
+        this.empLinkedListsArray[empLinkedListNo].delete(id);
+    }
 }
 
 
@@ -109,6 +120,45 @@ class EmpLinkedList {
             curEmp = curEmp.next;
         }
         curEmp.next = emp;
+    }
+
+    public void delete(int id) {
+        if(this.head == null) {
+            System.out.println("删除的雇员不存在");
+            return;
+        }
+        boolean flag = false;
+        Emp curEmp = this.head;
+        Emp fast = curEmp.next;
+        if(curEmp.id == id) {
+            if(curEmp.next == null) {
+                System.out.println("雇员" + head.id + "被删除了");
+                this.head = null;
+            }else {
+                System.out.println("雇员" + curEmp.id + "被删除了");
+                curEmp = curEmp.next;
+                this.head = curEmp;
+            }
+            return;
+        }
+        while (true) {
+            if(fast == null) {
+                break;
+            }
+            if(fast.id == id) {
+                flag = true;
+                curEmp.next = fast.next;
+                break;
+            }
+            curEmp = curEmp.next;
+            fast = curEmp.next;
+        }
+        if(flag) {
+            System.out.println("雇员" + fast.id + "被删除了");
+            flag = false;
+            return;
+        }
+        System.out.println("要删除的雇员" + id + "没有找到");
     }
 
     public void list(int no) {

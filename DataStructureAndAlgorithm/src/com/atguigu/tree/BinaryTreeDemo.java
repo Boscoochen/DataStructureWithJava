@@ -53,6 +53,30 @@ class BinaryTree {
             System.out.println("二叉树为空，无法遍历");
         }
     }
+
+    public HeroNode preOrderSearch(int no) {
+        if(root != null) {
+            return root.preOrderSearch(no);
+        } else {
+            return null;
+        }
+    }
+
+    public HeroNode infixOrderSearch(int no) {
+        if(root != null) {
+            return root.infixOrderSearch(no);
+        } else {
+            return null;
+        }
+    }
+
+    public HeroNode postOrderSearch(int no) {
+        if(root != null) {
+            return root.postOrderSearch(no);
+        }else {
+            return null;
+        }
+    }
 }
 
 
@@ -137,6 +161,60 @@ class HeroNode {
         }
 
         System.out.println(this);
+    }
+
+    public HeroNode preOrderSearch(int no) {
+        if(this.no == no) {
+            return this;
+        }
+        HeroNode resNode = null;
+        if (this.left != null) {
+            resNode = this.left.preOrderSearch(no);
+        }
+        if(resNode != null) {
+            return resNode;
+        }
+        if (this.right != null) {
+            resNode = this.right.preOrderSearch(no);
+        }
+        return resNode;
+    }
+
+    public HeroNode infixOrderSearch(int no) {
+        HeroNode resNode = null;
+        if(this.left != null) {
+            resNode = this.left.infixOrderSearch(no);
+        }
+        if(resNode != null) {
+            return resNode;
+        }
+        if(this.no == no) {
+            return this;
+        }
+        if (this.right != null) {
+            resNode = this.right.infixOrderSearch(no);
+        }
+        return resNode;
+    }
+
+    public HeroNode postOrderSearch(int no) {
+        HeroNode resNode = null;
+        if(this.left != null) {
+            resNode = this.left.postOrderSearch(no);
+        }
+//        if(resNode != null) {
+//            return resNode;
+//        }
+        if(this.right != null) {
+            resNode = this.right.postOrderSearch(no);
+        }
+        if(resNode != null) {
+            return resNode;
+        }
+        if(this.no == no) {
+            return this;
+        }
+        return resNode;
     }
 }
 

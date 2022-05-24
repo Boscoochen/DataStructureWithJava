@@ -20,6 +20,28 @@ public class BinaryTreeDemo {
         binaryTree.infixOrder();
         System.out.println("后序遍历");
         binaryTree.postOrder();
+
+//        System.out.println("前序遍历方式～～～");
+//        HeroNode resNode = binaryTree.preOrderSearch(5);
+//        if (resNode != null) {
+//            System.out.println("找到了：" + resNode);
+//        }else {
+//            System.out.println("没有找到");
+//        }
+//        System.out.println("中序遍历方式～～～");
+//        HeroNode resNode = binaryTree.infixOrderSearch(5);
+//        if (resNode != null) {
+//            System.out.println("找到了：" + resNode);
+//        }else {
+//            System.out.println("没有找到");
+//        }
+        System.out.println("后序遍历方式～～～");
+        HeroNode resNode = binaryTree.postOrderSearch(2);
+        if (resNode != null) {
+            System.out.println("找到了：" + resNode);
+        }else {
+            System.out.println("没有找到");
+        }
     }
 }
 
@@ -164,6 +186,7 @@ class HeroNode {
     }
 
     public HeroNode preOrderSearch(int no) {
+        System.out.println("进入前序遍历～～");
         if(this.no == no) {
             return this;
         }
@@ -188,6 +211,7 @@ class HeroNode {
         if(resNode != null) {
             return resNode;
         }
+        System.out.println("进入中序遍历～～");
         if(this.no == no) {
             return this;
         }
@@ -202,15 +226,17 @@ class HeroNode {
         if(this.left != null) {
             resNode = this.left.postOrderSearch(no);
         }
-//        if(resNode != null) {
-//            return resNode;
-//        }
+        if(resNode != null) {
+            return resNode;
+        }
         if(this.right != null) {
             resNode = this.right.postOrderSearch(no);
         }
         if(resNode != null) {
             return resNode;
         }
+        System.out.println("进入后序遍历～～");
+
         if(this.no == no) {
             return this;
         }

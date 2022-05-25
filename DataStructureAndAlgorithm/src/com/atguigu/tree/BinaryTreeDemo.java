@@ -36,7 +36,7 @@ public class BinaryTreeDemo {
 //            System.out.println("没有找到");
 //        }
         System.out.println("后序遍历方式～～～");
-        HeroNode resNode = binaryTree.postOrderSearch(2);
+        HeroNode resNode = binaryTree.postOrderSearch(5);
         if (resNode != null) {
             System.out.println("找到了：" + resNode);
         }else {

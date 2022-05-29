@@ -39,7 +39,7 @@ public class BinaryTreeDemo {
         HeroNode resNode = binaryTree.postOrderSearch(5);
         if (resNode != null) {
             System.out.println("找到了：" + resNode);
-        }else {
+        } else {
             System.out.println("没有找到");
         }
     }
@@ -50,6 +50,18 @@ class BinaryTree {
 
     public void setRoot(HeroNode root) {
         this.root = root;
+    }
+
+    public void delNode(int no) {
+        if(root != root) {
+            if (root.getNo() == no) {
+                root = null;
+            } else {
+                root.delNode(no);
+            }
+        }else {
+            System.out.println("空树，不能删除～");
+        }
     }
 
     public void preOrder() {
@@ -77,7 +89,7 @@ class BinaryTree {
     }
 
     public HeroNode preOrderSearch(int no) {
-        if(root != null) {
+        if (root != null) {
             return root.preOrderSearch(no);
         } else {
             return null;
@@ -85,7 +97,7 @@ class BinaryTree {
     }
 
     public HeroNode infixOrderSearch(int no) {
-        if(root != null) {
+        if (root != null) {
             return root.infixOrderSearch(no);
         } else {
             return null;
@@ -93,9 +105,9 @@ class BinaryTree {
     }
 
     public HeroNode postOrderSearch(int no) {
-        if(root != null) {
+        if (root != null) {
             return root.postOrderSearch(no);
-        }else {
+        } else {
             return null;
         }
     }
@@ -153,6 +165,26 @@ class HeroNode {
                 '}';
     }
 
+    public void delNode(int no) {
+        if (this.left != null && this.left.no == no) {
+            this.left = null;
+            return;
+        }
+
+        if (this.right != null && this.right.no == no) {
+            this.right = null;
+            return;
+        }
+
+        if (this.left != null) {
+            this.left.delNode(no);
+        }
+
+        if (this.right != null) {
+            this.right.delNode(no);
+        }
+    }
+
     public void preOrder() {
         System.out.println(this);
         if (this.left != null) {
@@ -187,14 +219,14 @@ class HeroNode {
 
     public HeroNode preOrderSearch(int no) {
         System.out.println("进入前序遍历～～");
-        if(this.no == no) {
+        if (this.no == no) {
             return this;
         }
         HeroNode resNode = null;
         if (this.left != null) {
             resNode = this.left.preOrderSearch(no);
         }
-        if(resNode != null) {
+        if (resNode != null) {
             return resNode;
         }
         if (this.right != null) {
@@ -205,14 +237,14 @@ class HeroNode {
 
     public HeroNode infixOrderSearch(int no) {
         HeroNode resNode = null;
-        if(this.left != null) {
+        if (this.left != null) {
             resNode = this.left.infixOrderSearch(no);
         }
-        if(resNode != null) {
+        if (resNode != null) {
             return resNode;
         }
         System.out.println("进入中序遍历～～");
-        if(this.no == no) {
+        if (this.no == no) {
             return this;
         }
         if (this.right != null) {
@@ -223,21 +255,21 @@ class HeroNode {
 
     public HeroNode postOrderSearch(int no) {
         HeroNode resNode = null;
-        if(this.left != null) {
+        if (this.left != null) {
             resNode = this.left.postOrderSearch(no);
         }
-        if(resNode != null) {
+        if (resNode != null) {
             return resNode;
         }
-        if(this.right != null) {
+        if (this.right != null) {
             resNode = this.right.postOrderSearch(no);
         }
-        if(resNode != null) {
+        if (resNode != null) {
             return resNode;
         }
         System.out.println("进入后序遍历～～");
 
-        if(this.no == no) {
+        if (this.no == no) {
             return this;
         }
         return resNode;

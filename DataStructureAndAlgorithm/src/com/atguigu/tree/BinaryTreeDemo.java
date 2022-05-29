@@ -35,13 +35,18 @@ public class BinaryTreeDemo {
 //        }else {
 //            System.out.println("没有找到");
 //        }
-        System.out.println("后序遍历方式～～～");
-        HeroNode resNode = binaryTree.postOrderSearch(5);
-        if (resNode != null) {
-            System.out.println("找到了：" + resNode);
-        } else {
-            System.out.println("没有找到");
-        }
+//        System.out.println("后序遍历方式～～～");
+//        HeroNode resNode = binaryTree.postOrderSearch(5);
+//        if (resNode != null) {
+//            System.out.println("找到了：" + resNode);
+//        } else {
+//            System.out.println("没有找到");
+//        }
+        System.out.println("删除前，前序遍历");
+        binaryTree.preOrder();
+        binaryTree.delNode(3);
+        System.out.println("删除后，前序遍历");
+        binaryTree.preOrder();
     }
 }
 
@@ -53,7 +58,7 @@ class BinaryTree {
     }
 
     public void delNode(int no) {
-        if(root != root) {
+        if(root != null) {
             if (root.getNo() == no) {
                 root = null;
             } else {

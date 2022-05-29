@@ -182,7 +182,7 @@ class HeroNode {
             } else if(this.right.right != null && this.right.left == null) {
                 this.right = this.right.right;
             } else if(this.right.right != null && this.right.left != null){
-                this.right.left.setRight(this.right.right);
+                this.right.left.right = this.right.right;
                 this.right = this.right.left;
             }
             return;

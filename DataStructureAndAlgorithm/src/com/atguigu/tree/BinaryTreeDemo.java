@@ -177,7 +177,14 @@ class HeroNode {
         }
 
         if (this.right != null && this.right.no == no) {
-            this.right = null;
+            if(this.right.left != null && this.right.right == null) {
+                this.right = this.right.left;
+            } else if(this.right.right != null && this.right.left == null) {
+                this.right = this.right.right;
+            } else if(this.right.right != null && this.right.left != null){
+                this.right.left.setRight(this.right.right);
+                this.right = this.right.left;
+            }
             return;
         }
 

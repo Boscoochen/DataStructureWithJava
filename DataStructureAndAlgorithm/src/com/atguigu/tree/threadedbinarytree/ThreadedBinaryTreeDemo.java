@@ -18,10 +18,10 @@ public class ThreadedBinaryTreeDemo {
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.setRoot(root);
         binaryTree.threadedNodes();
-        HeroNode lefNode = node5.getLeft();
-        HeroNode rightNode = node5.getRight();
-        System.out.println(lefNode);
-        System.out.println(rightNode);
+//        HeroNode lefNode = node5.getLeft();
+//        HeroNode rightNode = node5.getRight();
+//        System.out.println(lefNode);
+//        System.out.println(rightNode);
     }
 }
 

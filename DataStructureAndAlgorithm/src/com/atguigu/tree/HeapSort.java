@@ -1,11 +1,24 @@
 package com.atguigu.tree;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class HeapSort {
     public static void main(String[] args) {
-        int arr[] = {4, 6, 8, 5, 9, -1 , 90, 89, 50, -999};
+//        int arr[] = {4, 6, 8, 5, 9, -1 , 90, 89, 50, -999};
+        int[] arr = new int[8000000];
+        for (int i = 0; i < 8000000; i++) {
+            arr[i] = (int)(Math.random() * 8000000);
+        }
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date1str = simpleDateFormat.format(date);
+        System.out.println(date1str);
         heapSort(arr);
+        Date date2 = new Date();
+        String date2str = simpleDateFormat.format(date2);
+        System.out.println(date2str);
     }
 
     public static void heapSort(int arr[]) {
@@ -26,7 +39,7 @@ public class HeapSort {
             adjustHeap(arr, 0, j);
         }
 
-        System.out.println("数组=" + Arrays.toString(arr));
+//        System.out.println("数组=" + Arrays.toString(arr));
 
 
     }

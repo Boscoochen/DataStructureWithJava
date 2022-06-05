@@ -3,6 +3,31 @@ package com.atguigu.huffmancode;
 import java.util.*;
 
 public class HuffmanCode {
+    static Map<Byte, String> huffmanCodes = new HashMap<>();
+    static StringBuilder stringBuilder = new StringBuilder();
+
+    private static Map<Byte, String> getCodes(Node root) {
+        if(root == null) {
+            return null;
+        }
+        getCodes(root.left, "0", stringBuilder);
+        getCodes(root.right, "1", stringBuilder);
+        return huffmanCodes;
+    }
+
+    private static void getCodes(Node node, String code, StringBuilder stringBuilder) {
+        StringBuilder stringBuilder2 = new StringBuilder(stringBuilder);
+        stringBuilder2.append(code);
+        if(node != null) {
+            if(node.data == null) {
+                getCodes(node.left, "0", stringBuilder2);
+                getCodes(node.right, "1", stringBuilder2);
+            } else {
+                huffmanCodes.put(node.data, stringBuilder2.toString());
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String content = "i like like like java do you like a java";
         byte[] contentBytes = content.getBytes();
@@ -10,9 +35,12 @@ public class HuffmanCode {
         List<Node> nodes = getNodes(contentBytes);
         System.out.println("nodes=" + nodes);
         System.out.println("霍夫曼树");
-        Node huffmanTree = createHuffmanTree(nodes);
+        Node huffmanTreeRoot = createHuffmanTree(nodes);
         System.out.println("前序遍历");
-        huffmanTree.preOrder();
+        huffmanTreeRoot.preOrder();
+
+        getCodes(huffmanTreeRoot);
+        System.out.println("生成的赫夫曼编码表" + huffmanCodes);
     }
 
     private static void preOrder(Node root) {

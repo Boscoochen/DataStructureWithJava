@@ -32,22 +32,27 @@ public class HuffmanCode {
         String content = "i like like like java do you like a java";
         byte[] contentBytes = content.getBytes();
         System.out.println(contentBytes.length);
-        List<Node> nodes = getNodes(contentBytes);
-        System.out.println("nodes=" + nodes);
-        System.out.println("霍夫曼树");
-        Node huffmanTreeRoot = createHuffmanTree(nodes);
-        System.out.println("前序遍历");
-        huffmanTreeRoot.preOrder();
-
-        getCodes(huffmanTreeRoot);
-        System.out.println("生成的赫夫曼编码表" + huffmanCodes);
-        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
-        System.out.println("huffmanCodeBytes=" + Arrays.toString(huffmanCodeBytes));
+        byte[] huffmanCodesBytes = huffmanZip(contentBytes);
+        System.out.println("压缩后的结果是：" + Arrays.toString(huffmanCodesBytes) + "\n长度=" + huffmanCodesBytes.length);
+//        List<Node> nodes = getNodes(contentBytes);
+//        System.out.println("nodes=" + nodes);
+//        System.out.println("霍夫曼树");
+//        Node huffmanTreeRoot = createHuffmanTree(nodes);
+//        System.out.println("前序遍历");
+//        huffmanTreeRoot.preOrder();
+//
+//        getCodes(huffmanTreeRoot);
+//        System.out.println("生成的赫夫曼编码表" + huffmanCodes);
+//        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
+//        System.out.println("huffmanCodeBytes=" + Arrays.toString(huffmanCodeBytes));
     }
 
-//    private static byte[] huffmanZip(byte[] bytes) {
-//
-//    }
+    private static byte[] huffmanZip(byte[] bytes) {
+        List<Node> nodes = getNodes(bytes);
+        Node huffmanTreeRoot = createHuffmanTree(nodes);
+        Map<Byte, String> huffmanCodes = getCodes(huffmanTreeRoot);
+        return zip(bytes, huffmanCodes);
+    }
 
     private static byte[] zip(byte[] bytes, Map<Byte, String> huffmanCodes) {
         StringBuilder stringBuilder = new StringBuilder();

@@ -41,6 +41,39 @@ public class HuffmanCode {
 
         getCodes(huffmanTreeRoot);
         System.out.println("生成的赫夫曼编码表" + huffmanCodes);
+        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
+        System.out.println("huffmanCodeBytes=" + Arrays.toString(huffmanCodeBytes));
+    }
+
+//    private static byte[] huffmanZip(byte[] bytes) {
+//
+//    }
+
+    private static byte[] zip(byte[] bytes, Map<Byte, String> huffmanCodes) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(byte b : bytes) {
+            stringBuilder.append(huffmanCodes.get(b));
+        }
+//        System.out.println("测试 stringBuilder=" + stringBuilder.toString());
+        int len;
+        if(stringBuilder.length() % 8 == 0) {
+            len = stringBuilder.length() / 8;
+        } else {
+            len = stringBuilder.length() / 8 + 1;
+        }
+
+        byte[] huffmanCodeBytes = new byte[len];
+        int index = 0;
+        for (int i = 0; i < stringBuilder.length(); i+=8) {
+            String strByte;
+            if(i + 8 > stringBuilder.length()) {
+                strByte = stringBuilder.substring(i);
+            } else {
+                strByte = stringBuilder.substring(i, i + 8);
+            }
+            huffmanCodeBytes[index++] = (byte)Integer.parseInt(strByte, 2);
+        }
+        return huffmanCodeBytes;
     }
 
     private static void preOrder(Node root) {

@@ -34,6 +34,8 @@ public class HuffmanCode {
         System.out.println(contentBytes.length);
         byte[] huffmanCodesBytes = huffmanZip(contentBytes);
         System.out.println("压缩后的结果是：" + Arrays.toString(huffmanCodesBytes) + "\n长度=" + huffmanCodesBytes.length);
+
+//        byteToBitString(huffmanCodesBytes[0]);
 //        List<Node> nodes = getNodes(contentBytes);
 //        System.out.println("nodes=" + nodes);
 //        System.out.println("霍夫曼树");
@@ -45,6 +47,19 @@ public class HuffmanCode {
 //        System.out.println("生成的赫夫曼编码表" + huffmanCodes);
 //        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
 //        System.out.println("huffmanCodeBytes=" + Arrays.toString(huffmanCodeBytes));
+    }
+
+    private static String byteToBitString(boolean flag, byte b) {
+        int temp = b;
+        if(flag) {
+            temp |= 256;
+        }
+        String str = Integer.toBinaryString(temp);
+        if(flag) {
+            return str.substring(str.length() - 8);
+        }else {
+            return str;
+        }
     }
 
     private static byte[] huffmanZip(byte[] bytes) {

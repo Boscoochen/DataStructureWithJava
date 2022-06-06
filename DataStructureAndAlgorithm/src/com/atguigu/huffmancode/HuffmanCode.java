@@ -36,6 +36,8 @@ public class HuffmanCode {
         System.out.println("压缩后的结果是：" + Arrays.toString(huffmanCodesBytes) + "\n长度=" + huffmanCodesBytes.length);
 
 //        byteToBitString(huffmanCodesBytes[0]);
+        byte[] sourceBytes = decode(huffmanCodes, huffmanCodesBytes);
+        System.out.println("原来的字符串" + new String(sourceBytes));
 //        List<Node> nodes = getNodes(contentBytes);
 //        System.out.println("nodes=" + nodes);
 //        System.out.println("霍夫曼树");
@@ -62,6 +64,43 @@ public class HuffmanCode {
         }
     }
 
+    private static byte[] decode(Map<Byte, String> huffmanCodes, byte[] huffmanBytes) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < huffmanBytes.length; i++) {
+            boolean flag = (i == huffmanBytes.length - 1);
+            stringBuilder.append(byteToBitString(!flag, huffmanBytes[i]));
+        }
+        System.out.println("赫夫曼字节数组相对应的二进制字符串=" + stringBuilder.toString());
+        Map<String, Byte> map = new HashMap<>();
+        for(Map.Entry<Byte, String> entry : huffmanCodes.entrySet()) {
+            map.put(entry.getValue(), entry.getKey());
+        }
+        System.out.println(map);
+        List<Byte> list = new ArrayList<>();
+        for(int i = 0; i < stringBuilder.length();) {
+            int count = 1;
+            boolean flag = true;
+            Byte b = null;
+
+            while(flag) {
+                String key = stringBuilder.substring(i, i+count);
+                b = map.get(key);
+                if(b == null) {
+                    count++;
+                }else {
+                    flag = false;
+                }
+            }
+            list.add(b);
+            i += count;
+        }
+        byte[] b = new byte[list.size()];
+        for(int i = 0; i < b.length; i++) {
+            b[i] = list.get(i);
+        }
+        return b;
+    }
+
     private static byte[] huffmanZip(byte[] bytes) {
         List<Node> nodes = getNodes(bytes);
         Node huffmanTreeRoot = createHuffmanTree(nodes);
@@ -74,7 +113,7 @@ public class HuffmanCode {
         for(byte b : bytes) {
             stringBuilder.append(huffmanCodes.get(b));
         }
-//        System.out.println("测试 stringBuilder=" + stringBuilder.toString());
+        System.out.println("测试 stringBuilder=" + stringBuilder.toString());
         int len;
         if(stringBuilder.length() % 8 == 0) {
             len = stringBuilder.length() / 8;

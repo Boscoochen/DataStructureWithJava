@@ -41,21 +41,16 @@ public class HuffmanCode {
         System.out.println("原来的字符串" + new String(sourceBytes));
 
         //测试压缩文件
-        String srcFile = "/Users/bosco/Documents/qunitrix/qier.jpeg";
-        String dstFile = "/Users/bosco/Documents/qunitrix/qier.zip";
-        zipFile(srcFile, dstFile);
-        System.out.println("压缩文件ok～");
-//        List<Node> nodes = getNodes(contentBytes);
-//        System.out.println("nodes=" + nodes);
-//        System.out.println("霍夫曼树");
-//        Node huffmanTreeRoot = createHuffmanTree(nodes);
-//        System.out.println("前序遍历");
-//        huffmanTreeRoot.preOrder();
-//
-//        getCodes(huffmanTreeRoot);
-//        System.out.println("生成的赫夫曼编码表" + huffmanCodes);
-//        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
-//        System.out.println("huffmanCodeBytes=" + Arrays.toString(huffmanCodeBytes));
+//        String srcFile = "/Users/bosco/Documents/qunitrix/qier.jpeg";
+//        String dstFile = "/Users/bosco/Documents/qunitrix/qier.zip";
+//        zipFile(srcFile, dstFile);
+//        System.out.println("压缩文件ok～");
+
+        //测试解压文件
+        String zipFile = "/Users/bosco/Documents/qunitrix/qier.zip";
+        String dstFile = "/Users/bosco/Documents/qunitrix/qier2.jpeg";
+        unZipFile(zipFile, dstFile);
+        System.out.println("解压成功～");
     }
 
     public static void zipFile(String srcFile, String dstFile) {
@@ -82,7 +77,31 @@ public class HuffmanCode {
                 System.out.println(e.getMessage());
             }
         }
+    }
 
+    public static void unZipFile(String zipFile, String dstFile) {
+        InputStream is = null;
+        ObjectInputStream ois = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(zipFile);
+            ois = new ObjectInputStream(is);
+            byte[] huffmanBytes = (byte[]) ois.readObject();
+            Map<Byte,String> huffmanCodes = (Map<Byte,String>) ois.readObject();
+            byte[] bytes = decode(huffmanCodes, huffmanBytes);
+            os = new FileOutputStream(dstFile);
+            os.write(bytes);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                os.close();
+                ois.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static String byteToBitString(boolean flag, byte b) {

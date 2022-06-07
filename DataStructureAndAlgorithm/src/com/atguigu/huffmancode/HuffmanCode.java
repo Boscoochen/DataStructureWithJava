@@ -1,5 +1,6 @@
 package com.atguigu.huffmancode;
 
+import java.io.*;
 import java.util.*;
 
 public class HuffmanCode {
@@ -38,6 +39,12 @@ public class HuffmanCode {
 //        byteToBitString(huffmanCodesBytes[0]);
         byte[] sourceBytes = decode(huffmanCodes, huffmanCodesBytes);
         System.out.println("原来的字符串" + new String(sourceBytes));
+
+        //测试压缩文件
+        String srcFile = "/Users/bosco/Documents/qunitrix/qier.jpeg";
+        String dstFile = "/Users/bosco/Documents/qunitrix/qier.zip";
+        zipFile(srcFile, dstFile);
+        System.out.println("压缩文件ok～");
 //        List<Node> nodes = getNodes(contentBytes);
 //        System.out.println("nodes=" + nodes);
 //        System.out.println("霍夫曼树");
@@ -49,6 +56,33 @@ public class HuffmanCode {
 //        System.out.println("生成的赫夫曼编码表" + huffmanCodes);
 //        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
 //        System.out.println("huffmanCodeBytes=" + Arrays.toString(huffmanCodeBytes));
+    }
+
+    public static void zipFile(String srcFile, String dstFile) {
+        OutputStream os = null;
+        FileInputStream is = null;
+        ObjectOutputStream oos = null;
+        try {
+            is = new FileInputStream(srcFile);
+            byte[] b = new byte[is.available()];
+            is.read(b);
+            byte[] huffmanBytes = huffmanZip(b);
+            os = new FileOutputStream(dstFile);
+            oos = new ObjectOutputStream(os);
+            oos.writeObject(huffmanBytes);
+            oos.writeObject(huffmanCodes);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                is.close();
+                os.close();
+                oos.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     }
 
     private static String byteToBitString(boolean flag, byte b) {

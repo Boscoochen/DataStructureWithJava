@@ -71,6 +71,37 @@ class Node {
         }
     }
 
+    public Node search(int value) {
+        if(value == this.value) {
+            return this;
+        }else if(value < this.value) {
+            if (this.left == null) {
+                return null;
+            }
+            this.left.search(value);
+        } else {
+            if (this.right == null) {
+                return null;
+            }
+            return this.right.search(value);
+        }
+        return null;
+    }
+
+    public Node searchParent(int value) {
+        if((this.left != null && this.left.value == value) || (this.right != null && this.right.value == value)) {
+            return this;
+        }else {
+            if(value < this.value && this.left != null) {
+                return this.left.searchParent(value);
+            } else if (value >= this.value && this.right != null) {
+                return this.right.searchParent(value);
+            } else {
+                return null;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Node{" +

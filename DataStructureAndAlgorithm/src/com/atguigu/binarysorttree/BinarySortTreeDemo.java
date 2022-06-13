@@ -12,7 +12,12 @@ public class BinarySortTreeDemo {
         System.out.println("中序遍历二叉排序树");
         binarySortTree.infixOrder();
 
-        binarySortTree.delNode(12);
+//        binarySortTree.delNode(2);
+//        binarySortTree.delNode(5);
+//        binarySortTree.delNode(9);
+//        binarySortTree.delNode(12);
+        binarySortTree.delNode(1);
+
         System.out.println("删除节点后");
         binarySortTree.infixOrder();
     }
@@ -54,6 +59,22 @@ class BinarySortTree {
                     parent.left = null;
                 } else if(parent.right != null && parent.right.value == value) {
                     parent.right = null;
+                }
+            } else if (targetNode.left != null && targetNode.right != null) {
+
+            } else {
+                if(targetNode.left != null) {
+                    if (parent.left.value == value) {
+                        parent.left = targetNode.left;
+                    } else {
+                        parent.right = targetNode.left;
+                    }
+                } else {
+                    if(parent.left.value == value) {
+                        parent.left = targetNode.right;
+                    }else {
+                        parent.right = targetNode.right;
+                    }
                 }
             }
         }

@@ -3,7 +3,8 @@ package com.atguigu.avl;
 public class AVLTreeDemo {
     public static void main(String[] args) {
 //        int[] arr = {4,3,6,5,7,8};
-        int[] arr = {10, 12, 8, 9, 7, 6};
+//        int[] arr = {10, 12, 8, 9, 7, 6};
+        int arr[] = {10, 11, 7, 6, 8, 9};
         AVLTree avlTree = new AVLTree();
         for (int i = 0; i < arr.length; i++) {
             avlTree.add(new Node(arr[i]));
@@ -16,6 +17,7 @@ public class AVLTreeDemo {
         System.out.println("树的左子树的高度=" + avlTree.getRoot().leftHeight());
         System.out.println("树的右子树的高度=" + avlTree.getRoot().rightHeight());
         System.out.println("当前的跟结点=" + avlTree.getRoot());
+        System.out.println("跟节点的左子结点+ " + avlTree.getRoot().right.right);
     }
 }
 
@@ -194,10 +196,17 @@ class Node {
         }
 
         if (rightHeight() - leftHeight() > 1) {
+            if(right != null && right.leftHeight() > right.rightHeight()) {
+                right.rightRotate();
+            }
             leftRotate();
+            return;
         }
 
         if(leftHeight() - rightHeight() > 1) {
+            if(left != null && left.rightHeight() > left.leftHeight()) {
+                left.leftRotate();
+            }
             rightRotate();
         }
     }

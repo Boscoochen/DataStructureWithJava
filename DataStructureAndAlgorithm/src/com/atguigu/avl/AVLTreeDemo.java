@@ -10,7 +10,7 @@ public class AVLTreeDemo {
 
         System.out.println("中序遍历");
         avlTree.infixOrder();
-        System.out.println("在没有做平衡处理前～～");
+        System.out.println("在平衡处理前～～");
         System.out.println("树的高度" + avlTree.getRoot().height());
         System.out.println("树的左子树的高度=" + avlTree.getRoot().leftHeight());
         System.out.println("树的右子树的高度=" + avlTree.getRoot().rightHeight());
@@ -155,6 +155,15 @@ class Node {
         return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
     }
 
+    private void leftRotate() {
+        Node newNode = new Node(value);
+        newNode.left = left;
+        newNode.right = right.left;
+        value = right.value;
+        right = right.right;
+        left = newNode;
+    }
+
     public void add(Node node) {
         if (node == null) {
             return;
@@ -171,6 +180,10 @@ class Node {
             } else {
                 this.right.add(node);
             }
+        }
+
+        if(rightHeight() - leftHeight() > 1) {
+            leftRotate();
         }
     }
 

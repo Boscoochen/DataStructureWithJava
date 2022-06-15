@@ -16,7 +16,10 @@ public class BinarySortTreeDemo {
 //        binarySortTree.delNode(5);
 //        binarySortTree.delNode(9);
 //        binarySortTree.delNode(12);
-        binarySortTree.delNode(1);
+//        binarySortTree.delNode(1);
+        binarySortTree.delNode(7);
+//        binarySortTree.delNode(10);
+
 
         System.out.println("删除节点后");
         binarySortTree.infixOrder();
@@ -41,6 +44,24 @@ class BinarySortTree {
         }
     }
 
+    public int delRightTreeMin(Node node) {
+        Node target = node;
+        while(target.left != null) {
+            target = target.left;
+        }
+        delNode(target.value);
+        return target.value;
+    }
+
+    public int delLeftTreeMax(Node node) {
+        Node target = node;
+        while(target.right != null) {
+            target = target.right;
+        }
+        delNode(target.value);
+        return target.value;
+    }
+
     public void delNode(int value) {
         if(root == null) {
             return;
@@ -61,7 +82,10 @@ class BinarySortTree {
                     parent.right = null;
                 }
             } else if (targetNode.left != null && targetNode.right != null) {
-
+//                int minVal = delRightTreeMin(targetNode.right);
+//                targetNode.value = minVal;
+                int maxVal = delLeftTreeMax(targetNode.left);
+                targetNode.value = maxVal;
             } else {
                 if(targetNode.left != null) {
                     if (parent.left.value == value) {

@@ -12,13 +12,16 @@ public class BinarySortTreeDemo {
         System.out.println("中序遍历二叉排序树");
         binarySortTree.infixOrder();
 
-//        binarySortTree.delNode(2);
-//        binarySortTree.delNode(5);
-//        binarySortTree.delNode(9);
-//        binarySortTree.delNode(12);
-//        binarySortTree.delNode(1);
+        binarySortTree.delNode(2);
+        binarySortTree.delNode(5);
+        binarySortTree.delNode(9);
+        binarySortTree.delNode(12);
         binarySortTree.delNode(7);
-//        binarySortTree.delNode(10);
+        binarySortTree.delNode(3);
+        binarySortTree.delNode(1);
+        binarySortTree.delNode(10);
+//        System.out.println("root=" + binarySortTree.getRoot());
+
 
 
         System.out.println("删除节点后");
@@ -34,6 +37,10 @@ class BinarySortTree {
         } else {
             return root.search(value);
         }
+    }
+
+    public Node getRoot() {
+        return root;
     }
 
     public Node searchParent(int value) {
@@ -88,16 +95,24 @@ class BinarySortTree {
                 targetNode.value = maxVal;
             } else {
                 if(targetNode.left != null) {
-                    if (parent.left.value == value) {
-                        parent.left = targetNode.left;
+                    if(parent != null) {
+                        if (parent.left.value == value) {
+                            parent.left = targetNode.left;
+                        } else {
+                            parent.right = targetNode.left;
+                        }
                     } else {
-                        parent.right = targetNode.left;
+                        root = targetNode.left;
                     }
                 } else {
-                    if(parent.left.value == value) {
-                        parent.left = targetNode.right;
-                    }else {
-                        parent.right = targetNode.right;
+                    if (parent != null) {
+                        if (parent.left.value == value) {
+                            parent.left = targetNode.right;
+                        } else {
+                            parent.right = targetNode.right;
+                        }
+                    } else {
+                        root = targetNode.right;
                     }
                 }
             }

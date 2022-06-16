@@ -7,6 +7,7 @@ public class Graph {
     private ArrayList<String> vertexList;
     private int[][] edges;
     private int numOfEdges;
+    private boolean[] isVisited;
 
     public static void main(String[] args) {
         int n = 5;
@@ -22,12 +23,55 @@ public class Graph {
         graph.insertEdge(1, 4, 1);
 
         graph.showGraph();
+
+        System.out.println("深度遍历");
+        graph.dfs();
     }
 
     public Graph(int n) {
         edges = new int[n][n];
         vertexList = new ArrayList<String>(n);
         numOfEdges = 0;
+        isVisited = new boolean[n];
+    }
+
+    public int getFirstNeighbor(int index) {
+        for(int j = 0; j < vertexList.size(); j++) {
+            if(edges[index][j] > 0) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    public int getNextNeighbor(int v1, int v2) {
+        for(int j = v2 + 1; j < vertexList.size(); j++) {
+            if(edges[v1][j] > 0) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    public void dfs(boolean[] isVisited, int i) {
+        System.out.print(getValueByIndex(i) + "->");
+        isVisited[i] = true;
+        int w = getFirstNeighbor(i);
+        while (w != -1) {
+            if(!isVisited[w]) {
+                dfs(isVisited, w);
+            }
+
+            w = getNextNeighbor(i, w);
+        }
+    }
+
+    public void dfs() {
+        for(int i = 0; i < getNumOfVertex(); i++) {
+            if(!isVisited[i]) {
+                dfs(isVisited, i);
+            }
+        }
     }
 
     public void insertVertex(String vertex) {

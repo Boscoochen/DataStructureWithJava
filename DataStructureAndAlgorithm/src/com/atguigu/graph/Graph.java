@@ -2,6 +2,7 @@ package com.atguigu.graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Graph {
     private ArrayList<String> vertexList;
@@ -24,8 +25,11 @@ public class Graph {
 
         graph.showGraph();
 
-        System.out.println("深度遍历");
-        graph.dfs();
+//        System.out.println("深度遍历");
+//        graph.dfs();
+
+        System.out.println("广度优先");
+        graph.bfs();
     }
 
     public Graph(int n) {
@@ -53,7 +57,7 @@ public class Graph {
         return -1;
     }
 
-    public void dfs(boolean[] isVisited, int i) {
+    private void dfs(boolean[] isVisited, int i) {
         System.out.print(getValueByIndex(i) + "->");
         isVisited[i] = true;
         int w = getFirstNeighbor(i);
@@ -70,6 +74,36 @@ public class Graph {
         for(int i = 0; i < getNumOfVertex(); i++) {
             if(!isVisited[i]) {
                 dfs(isVisited, i);
+            }
+        }
+    }
+
+    private void bfs(boolean[] isVisited, int i) {
+        int u;
+        int w;
+        LinkedList queue = new LinkedList();
+        System.out.print(getValueByIndex(i) + "=>");
+        isVisited[i] = true;
+        queue.addLast(i);
+
+        while (!queue.isEmpty()) {
+           u = (Integer) queue.removeFirst();
+           w = getFirstNeighbor(u);
+           while (w != -1) {
+               if(!isVisited[w]) {
+                   System.out.print(getValueByIndex(w) + "=>");
+                   isVisited[w] = true;
+                   queue.addLast(w);
+               }
+               w = getNextNeighbor(u, w);
+           }
+        }
+    }
+
+    public void bfs() {
+        for (int i = 0; i < getNumOfVertex(); i++) {
+            if(!isVisited[i]) {
+                bfs(isVisited, i);
             }
         }
     }

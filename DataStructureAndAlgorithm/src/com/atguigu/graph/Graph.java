@@ -11,22 +11,35 @@ public class Graph {
     private boolean[] isVisited;
 
     public static void main(String[] args) {
-        int n = 5;
-        String[] vertexes = {"A", "B", "C", "D", "E"};
-        Graph graph = new Graph(n);
+//        int n = 5;
+//        String[] vertexes = {"A", "B", "C", "D", "E"};
+
+        String[] vertexes = {"1", "2", "3", "4", "5", "6", "7", "8"};
+        Graph graph = new Graph(vertexes.length);
         for (String vertex : vertexes) {
             graph.insertVertex(vertex);
         }
+//        graph.insertEdge(0, 1, 1);
+//        graph.insertEdge(0, 2, 1);
+//        graph.insertEdge(1, 2, 1);
+//        graph.insertEdge(1, 3, 1);
+//        graph.insertEdge(1, 4, 1);
         graph.insertEdge(0, 1, 1);
         graph.insertEdge(0, 2, 1);
-        graph.insertEdge(1, 2, 1);
         graph.insertEdge(1, 3, 1);
         graph.insertEdge(1, 4, 1);
+        graph.insertEdge(3, 7, 1);
+        graph.insertEdge(4, 7, 1);
+        graph.insertEdge(2, 5, 1);
+        graph.insertEdge(2, 6, 1);
+        graph.insertEdge(5, 6, 1);
+
 
         graph.showGraph();
 
-//        System.out.println("深度遍历");
-//        graph.dfs();
+        System.out.println("深度遍历");
+        graph.dfs();
+        System.out.println();
 
         System.out.println("广度优先");
         graph.bfs();
@@ -36,7 +49,6 @@ public class Graph {
         edges = new int[n][n];
         vertexList = new ArrayList<String>(n);
         numOfEdges = 0;
-        isVisited = new boolean[n];
     }
 
     public int getFirstNeighbor(int index) {
@@ -71,6 +83,7 @@ public class Graph {
     }
 
     public void dfs() {
+        isVisited = new boolean[getNumOfVertex()];
         for(int i = 0; i < getNumOfVertex(); i++) {
             if(!isVisited[i]) {
                 dfs(isVisited, i);
@@ -101,6 +114,7 @@ public class Graph {
     }
 
     public void bfs() {
+        isVisited = new boolean[getNumOfVertex()];
         for (int i = 0; i < getNumOfVertex(); i++) {
             if(!isVisited[i]) {
                 bfs(isVisited, i);

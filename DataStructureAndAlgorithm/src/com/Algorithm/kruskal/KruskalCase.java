@@ -1,5 +1,7 @@
 package com.Algorithm.kruskal;
 
+import java.util.Arrays;
+
 public class KruskalCase {
     private int edgeNum;
     private char[] vertexes;
@@ -19,6 +21,8 @@ public class KruskalCase {
 
         KruskalCase kruskalCase = new KruskalCase(vertexes, matrix);
         kruskalCase.print();
+
+        System.out.println(Arrays.toString(kruskalCase.getEdges()));
     }
 
     public KruskalCase(char[] vertexes, int[][] matrix) {
@@ -37,7 +41,7 @@ public class KruskalCase {
         }
 
         for(int i = 0; i < vLen; i++) {
-            for(int j = 0; j < vLen; j++) {
+            for(int j = i + 1; j < vLen; j++) {
                 if(this.matrix[i][j] != INF) {
                     edgeNum++;
                 }
@@ -53,5 +57,59 @@ public class KruskalCase {
             }
             System.out.println();
         }
+    }
+
+    private void sortEdge(EData[] edges) {
+        for (int i = 0; i < edges.length - 1; i++) {
+            for (int j = 0; j < edges.length - 1 - i; j++) {
+                if(edges[j].weight > edges[j + 1].weight) {
+                    EData tmp = edges[j];
+                    edges[j] = edges[j+1];
+                    edges[j+1] = tmp;
+                }
+            }
+        }
+    }
+
+    private int getPosition(char ch) {
+        for (int i = 0; i < vertexes.length; i++) {
+            if (vertexes[i] == ch) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private EData[] getEdges() {
+        int index = 0;
+        EData[] edges = new EData[edgeNum];
+        for (int i = 0; i < vertexes.length; i++) {
+            for (int j = i + 1; j < vertexes.length; j++) {
+                if(matrix[i][j] != INF) {
+                    edges[index++] = new EData(vertexes[i], vertexes[j], matrix[i][j]);
+                }
+            }
+        }
+        return edges;
+    }
+}
+
+class EData {
+    char start;
+    char end;
+    int weight;
+    public EData(char start, char end, int weight) {
+        this.start = start;
+        this.end = end;
+        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "EData{" +
+                "start=" + start +
+                ", end=" + end +
+                ", weight=" + weight +
+                "}\n";
     }
 }

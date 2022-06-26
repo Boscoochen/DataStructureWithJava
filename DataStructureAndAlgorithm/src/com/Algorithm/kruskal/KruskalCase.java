@@ -21,7 +21,7 @@ public class KruskalCase {
 
         KruskalCase kruskalCase = new KruskalCase(vertexes, matrix);
         kruskalCase.print();
-
+        kruskalCase.kruskal();
     }
 
     public KruskalCase(char[] vertexes, int[][] matrix) {
@@ -47,6 +47,32 @@ public class KruskalCase {
             }
         }
     }
+
+    public void kruskal() {
+        int index = 0;
+        int[] ends = new int[edgeNum];
+        EData[] res = new EData[edgeNum];
+        EData[] edges = getEdges();
+        System.out.println("图的边的集合=" + Arrays.toString(edges) + " 共" + edges.length);
+        sortEdge(edges);
+        for(int i = 0; i < edgeNum; i++) {
+            int p1 = getPosition(edges[i].start);
+            int p2 = getPosition(edges[i].end);
+            int m = getEnd(ends, p1);
+            int n = getEnd(ends, p2);
+
+            if(m != n) {
+                ends[m] = n;
+                res[index++] = edges[i];
+            }
+        }
+        System.out.println("最小生成树为=");
+        for (int i = 0; i < index; i++) {
+            System.out.println(res[i]);
+        }
+    }
+
+
 
     public void print() {
         System.out.println("临接矩阵为：");
@@ -116,6 +142,6 @@ class EData {
                 "start=" + start +
                 ", end=" + end +
                 ", weight=" + weight +
-                "}\n";
+                "}";
     }
 }

@@ -22,7 +22,6 @@ public class KruskalCase {
         KruskalCase kruskalCase = new KruskalCase(vertexes, matrix);
         kruskalCase.print();
 
-        System.out.println(Arrays.toString(kruskalCase.getEdges()));
     }
 
     public KruskalCase(char[] vertexes, int[][] matrix) {
@@ -91,6 +90,13 @@ public class KruskalCase {
             }
         }
         return edges;
+    }
+
+    private int getEnd(int[] ends, int i) {
+        while(ends[i] != 0) {
+            i = ends[i];
+        }
+        return i;
     }
 }
 

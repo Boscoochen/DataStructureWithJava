@@ -17,7 +17,7 @@ public class DijkstraAlgorithm {
         Graph graph = new Graph(vertexes, matrix);
         graph.showGraph();
 
-        graph.dsj(6);
+        graph.dsj(2);
         graph.shoDijkstra();
     }
 }

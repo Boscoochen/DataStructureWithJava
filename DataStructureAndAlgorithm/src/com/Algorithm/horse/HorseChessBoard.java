@@ -2,6 +2,8 @@ package com.Algorithm.horse;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class HorseChessBoard {
     private static int X;
@@ -34,6 +36,7 @@ public class HorseChessBoard {
         chessboard[row][column] = step;
         visited[row * X + column] = true;
         ArrayList<Point> ps = next(new Point(column, row));
+        sort(ps);
         while (!ps.isEmpty()) {
             Point p = ps.remove(0);
             if (!visited[p.y * X + p.x]) {
@@ -77,6 +80,24 @@ public class HorseChessBoard {
             ps.add(new Point(p1));
         }
         return ps;
+    }
+
+    public static void sort(ArrayList<Point> ps) {
+        ps.sort(new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                int count1 = next(o1).size();
+                int count2 = next(o2).size();
+//                if (count1 < count2) {
+//                    return -1;
+//                } else if(count1 == count2) {
+//                    return 0;
+//                }else {
+//                    return 1;
+//                }
+                return count1 - count2;
+            }
+        });
     }
 }
 

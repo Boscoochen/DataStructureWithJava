@@ -2,9 +2,19 @@ package com.interview;
 
 import java.util.Stack;
 
+
+
 public class MyStack1 {
     private Stack<Integer> stackData;
     private Stack<Integer> stackMin;
+
+    public static void main(String[] args) {
+        MyStack1 myStack1 = new MyStack1();
+        myStack1.push(1);
+        myStack1.push(2);
+        myStack1.push(-2);
+        System.out.println("min=" + myStack1.getmin());
+    }
 
     public MyStack1() {
         this.stackData = new Stack<Integer>();
@@ -36,5 +46,12 @@ public class MyStack1 {
             throw new RuntimeException("Your stack is empty");
         }
         return this.stackMin.peek();
+    }
+
+    public void show() {
+        while (!stackData.isEmpty()) {
+            int num = stackData.pop();
+            System.out.println(num);
+        }
     }
 }

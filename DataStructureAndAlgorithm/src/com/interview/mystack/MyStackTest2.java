@@ -1,4 +1,4 @@
-package com.interview;
+package com.interview.mystack;
 
 public class MyStackTest2 {
     public static void main(String[] args) {

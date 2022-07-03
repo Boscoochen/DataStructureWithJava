@@ -31,7 +31,6 @@ public class KMPAlgorithm {
     }
 
     public static int[] kmpNext(String dest) {
-        //dest = "ABCDABD"
         int[] next = new int[dest.length()];
         next[0] = 0;
         for(int i = 1, j = 0; i < dest.length(); i++) {
@@ -47,3 +46,7 @@ public class KMPAlgorithm {
         return next;
     }
 }
+
+//dest = "ABCDABD"
+//next = {0,0,0,0,1,2,0}
+//i = 6, j = 0

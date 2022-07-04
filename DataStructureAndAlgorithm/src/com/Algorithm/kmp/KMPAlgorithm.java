@@ -47,6 +47,6 @@ public class KMPAlgorithm {
     }
 }
 
-//dest = "ABCDABD"
-//next = {0,0,0,0,1,2,0}
-//i = 6, j = 0
+//dest = "AACDABD"
+//next = {0,1,0,0,1,0,0}
+//i = 5, j = 0

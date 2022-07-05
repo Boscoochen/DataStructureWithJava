@@ -154,3 +154,6 @@ public class Graph {
         numOfEdges++;
     }
 }
+
+//vertexesList = {1, 2, 3, 4, 5, 6, 7, 8}
+//isVisited = {true, false, false, false, false, false, false, false}

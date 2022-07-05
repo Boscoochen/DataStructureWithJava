@@ -50,6 +50,10 @@ class MinTree {
         for(int k = 1; k < graph.verxs; k++) {
             for(int i = 0; i < graph.verxs; i++) {
                 for (int j = 0; j < graph.verxs; j++) {
+                    //# -》 *
+                    //visited[i] == 1 表示 # 的点已经访问过了
+                    //visited[j] == 0 表示 * 的点还没被访问
+                    //graph.weight[i][j] < minWeight 贪心算法， 两个内for loop找最小的权值
                     if(visited[i] == 1 && visited[j] == 0 && graph.weight[i][j] < minWeight) {
                         minWeight = graph.weight[i][j];
                         h1 = i;
@@ -58,6 +62,7 @@ class MinTree {
                 }
             }
             System.out.println("边<" + graph.data[h1] + "," + graph.data[h2] + "> 权值：" + minWeight);
+            //每结束两个内for loop，贪心算法找到最小的权值，一共进行6次 把对应的index值改为1，表示访问了
             visited[h2] = 1;
             minWeight = 10000;
         }
@@ -76,3 +81,8 @@ class MGraph {
         weight = new int[verxs][verxs];
     }
 }
+
+//visited = {1, 1, 0, 0, 0, 0, 1}
+//h1 = 0, h2 = 6
+//minWeight = 10000
+//k = 1

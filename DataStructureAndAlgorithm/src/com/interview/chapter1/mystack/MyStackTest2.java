@@ -1,4 +1,4 @@
-package com.interview.mystack;
+package com.interview.chapter1.mystack;
 
 public class MyStackTest2 {
     public static void main(String[] args) {

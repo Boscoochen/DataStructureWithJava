@@ -1,4 +1,4 @@
-package com.interview.hanoi_progblem;
+package com.interview.chapter1.hanoi_progblem;
 
 
 public class HanoiProblem1 {

@@ -1,4 +1,4 @@
-package com.interview.twostackqueue;
+package com.interview.chapter1.twostackqueue;
 
 import java.util.Stack;
 

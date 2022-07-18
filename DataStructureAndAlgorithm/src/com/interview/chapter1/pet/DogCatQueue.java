@@ -1,4 +1,4 @@
-package com.interview.pet;
+package com.interview.chapter1.pet;
 
 import java.util.LinkedList;
 import java.util.Queue;

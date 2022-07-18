@@ -1,4 +1,4 @@
-package com.interview.getmaxtree;
+package com.interview.chapter1.getmaxtree;
 
 public class Node {
     public int value;

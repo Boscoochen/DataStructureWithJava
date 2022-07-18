@@ -1,4 +1,4 @@
-package com.interview.sort_stack_by_stack;
+package com.interview.chapter1.sort_stack_by_stack;
 
 import java.util.Stack;
 

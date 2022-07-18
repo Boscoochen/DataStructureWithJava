@@ -1,4 +1,4 @@
-package com.interview.get_max_window;
+package com.interview.chapter1.get_max_window;
 
 import java.util.LinkedList;
 

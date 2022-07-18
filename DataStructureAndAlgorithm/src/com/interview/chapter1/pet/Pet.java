@@ -1,4 +1,4 @@
-package com.interview.pet;
+package com.interview.chapter1.pet;
 
 public class Pet {
     private String type;

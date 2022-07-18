@@ -1,4 +1,4 @@
-package com.interview.reverse_stack;
+package com.interview.chapter1.reverse_stack;
 
 import java.util.Stack;
 

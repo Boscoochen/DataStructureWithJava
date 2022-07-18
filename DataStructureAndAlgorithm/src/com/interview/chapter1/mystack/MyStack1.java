@@ -1,4 +1,4 @@
-package com.interview.mystack;
+package com.interview.chapter1.mystack;
 
 import java.util.Stack;
 

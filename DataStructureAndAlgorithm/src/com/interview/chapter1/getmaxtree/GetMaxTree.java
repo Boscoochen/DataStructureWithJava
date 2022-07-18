@@ -1,4 +1,4 @@
-package com.interview.getmaxtree;
+package com.interview.chapter1.getmaxtree;
 
 import java.util.HashMap;
 import java.util.Stack;

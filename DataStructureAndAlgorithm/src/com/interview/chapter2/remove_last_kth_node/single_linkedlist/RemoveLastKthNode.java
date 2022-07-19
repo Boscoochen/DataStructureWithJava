@@ -15,8 +15,7 @@ public class RemoveLastKthNode {
         node3.next = node4;
         node4.next = node5;
         print();
-        head = removeLastKthNode(head, 5);
-        System.out.println(head.hashCode());
+        head = removeLastKthNode(head, 6);
         print();
     }
     public static void print() {
@@ -28,8 +27,7 @@ public class RemoveLastKthNode {
         System.out.println();
     }
     public static Node removeLastKthNode(Node head, int lastKth) {
-        System.out.println(head.hashCode());
-
+        //这里是行参head， 这里的地址变动对实参没有任何关系
         if (head == null || lastKth < 1) {
             return head;
         }

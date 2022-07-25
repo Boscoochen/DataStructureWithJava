@@ -1,6 +1,4 @@
-package com.interview.chapter2.remove_mid_node;
-
-import java.util.regex.Pattern;
+package com.interview.chapter2.删除链表的中间节点和a分之b处的节点;
 
 public class RemoveMidNode {
     public static Node head;

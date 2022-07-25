@@ -1,4 +1,4 @@
-package com.interview.chapter2.remove_last_kth_node.double_linkedlist;
+package com.interview.chapter2.在单链表和双链表中删除倒数第K个节点.double_linkedlist;
 
 public class RemoveLastKthNode {
     public static DoubleNode head;

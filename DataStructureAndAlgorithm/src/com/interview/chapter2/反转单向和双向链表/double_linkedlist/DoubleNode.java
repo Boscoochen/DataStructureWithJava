@@ -1,4 +1,4 @@
-package com.interview.chapter2.reverse_linkedlist.double_linkedlist;
+package com.interview.chapter2.反转单向和双向链表.double_linkedlist;
 
 public class DoubleNode {
     public int value;

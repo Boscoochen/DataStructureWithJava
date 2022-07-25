@@ -1,4 +1,4 @@
-package com.interview.chapter2.reverse_linkedlist.single;
+package com.interview.chapter2.反转单向和双向链表.single;
 
 public class ReverseList {
     public static Node head;

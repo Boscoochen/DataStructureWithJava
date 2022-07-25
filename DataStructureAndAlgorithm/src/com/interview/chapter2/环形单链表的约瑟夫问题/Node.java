@@ -1,4 +1,4 @@
-package com.interview.chapter2.remove_mid_node;
+package com.interview.chapter2.环形单链表的约瑟夫问题;
 
 public class Node {
     public int value;

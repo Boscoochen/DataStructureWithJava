@@ -1,7 +1,6 @@
-package com.interview.chapter2.is_palindrome;
+package com.interview.chapter2.判断一个链表是否回文结构;
 
 import java.util.Stack;
-import java.util.regex.Pattern;
 
 public class IsPalindrome {
     public static Node head;

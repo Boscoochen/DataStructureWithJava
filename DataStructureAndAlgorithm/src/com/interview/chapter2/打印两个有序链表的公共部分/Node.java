@@ -1,4 +1,4 @@
-package com.interview.chapter2.print_common_part;
+package com.interview.chapter2.打印两个有序链表的公共部分;
 
 public class Node {
     public int value;

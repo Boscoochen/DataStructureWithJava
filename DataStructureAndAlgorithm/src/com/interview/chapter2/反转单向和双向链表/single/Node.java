@@ -1,4 +1,4 @@
-package com.interview.chapter2.remove_last_kth_node.single_linkedlist;
+package com.interview.chapter2.反转单向和双向链表.single;
 
 public class Node {
     public int value;

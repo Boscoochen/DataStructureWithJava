@@ -1,4 +1,4 @@
-package com.interview.chapter2.josephu_kill_1;
+package com.interview.chapter2.环形单链表的约瑟夫问题;
 
 public class JosephusKill1 {
     public static Node head;

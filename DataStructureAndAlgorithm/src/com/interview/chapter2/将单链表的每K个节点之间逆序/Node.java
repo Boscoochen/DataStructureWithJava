@@ -1,4 +1,4 @@
-package com.interview.chapter2.josephu_kill_1;
+package com.interview.chapter2.将单链表的每K个节点之间逆序;
 
 public class Node {
     public int value;

@@ -19,6 +19,7 @@ public class Contains {
         head.right = new Node(5);
 
         System.out.println(contains(head, head2));
+
     }
     public static boolean contains(Node t1, Node t2) {
         return check(t1, t2) || contains(t1.left, t2) || contains(t1.right, t2);

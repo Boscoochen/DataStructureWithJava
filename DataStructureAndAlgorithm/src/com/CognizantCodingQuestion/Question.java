@@ -2,6 +2,9 @@ package com.CognizantCodingQuestion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+
 
 public class Question {
     public static void main(String[] args) {
@@ -54,6 +57,8 @@ public class Question {
                     }
                 }
             }
+            HashSet hashTable  = new HashSet();
+
         }
         System.out.println(map);
     }

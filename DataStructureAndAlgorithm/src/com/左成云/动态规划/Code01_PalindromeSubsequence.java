@@ -1,10 +1,89 @@
 package com.左成云.动态规划;
 
-public class test {
+public class Code01_PalindromeSubsequence {
     public static void main(String[] args) {
         String str = "a12b3c43def2ghi1kpm";
-        System.out.println(way(str));
+//        System.out.println(way(str));
 //        System.out.println(way2(str));
+//        System.out.println(lpsl(str));
+        System.out.println(way3(str));
+    }
+
+    public static int lpsl(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        char[] str = s.toCharArray();
+        int N = str.length;
+        return f(s.toCharArray(), 0, N - 1);
+    }
+
+    public static int f(char[] str, int L, int R) {
+        if (L == R) {
+            return 1;
+        }
+        if (L == R - 1) {
+            return str[L] == str[R] ? 2 : 1;
+        }
+
+        //x L x R
+        int p1 = f(str, L + 1, R - 1);
+        //L xR
+        int p2 = f(str, L, R - 1);
+        int p3 = f(str, L + 1, R);
+        int p4 = str[L] == str[R] ? 2 + f(str, L + 1, R - 1) : 0;
+        return Math.max(Math.max(p1, Math.max(p2, p3)), p4);
+    }
+
+    public static int way3(String str) {
+        char[] s1 = str.toCharArray();
+        int N = s1.length;
+        int[][] dp = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            dp[i][i] = 1;
+        }
+
+        for (int i = 0 ; i < N; i++) {
+            for (int j = i + 1; j < N; j++) {
+                if (i == j - 1) {
+                    dp[i][j] = s1[i] == s1[j] ? 2 : 1;
+                }
+            }
+        }
+
+//        dp[N - 1][N - 1] = 1;
+//        for (int i = 0; i < N -1; i++) {
+//            dp[i][i] = 1;
+//            dp[i][i + 1] = s1[i] == s1[i + 1] ? 2 : 0;
+//        }
+        int n = 2;
+        for (int j = 2; j < N ; j++) {
+            for (int i = 0, k = 0; i < N - n; i++) {
+                dp[i][j + k] = Math.max(dp[i][j - 1 + k], dp[i + 1][j + k]);
+                if (s1[i] == s1[j + k]) {
+                    dp[i][j + k] = Math.max(dp[i][j + k], 2 + dp[i + 1][j - 1 + k]);
+                }
+//                int p1 = dp[i + 1][j - 1 + k];
+//                int p2 = dp[i][j - 1 + k];
+//                int p3 = dp[i + 1][j + k];
+//                int p4 = s1[i] == s1[j + k] ? (2 + dp[i + 1][j - 1 + k]) : 0;
+//                dp[i][j + k] = Math.max(Math.max(p1, p2), Math.max(p3, p4));
+                k++;
+            }
+            n++;
+        }
+
+//        for (int i = N - 3; i >= 0; i--) {
+//            for (int j = i + 2; j < N; j++) {
+//                int p1 = dp[i + 1][j - 1];
+//                int p2 = dp[i][j - 1];
+//                int p3 = dp[i + 1][j];
+//                int p4 = s1[i] == s1[j] ? (2 + dp[i + 1][j - 1]) : 0;
+//                dp[i][j] = Math.max(Math.max(p1, p2), Math.max(p3, p4));
+//            }
+//        }
+
+        return dp[0][N - 1];
     }
 
     public static int way(String str) {
@@ -74,4 +153,6 @@ public class test {
 
         return dp[N - 1][M - 1];
     }
+
+
 }

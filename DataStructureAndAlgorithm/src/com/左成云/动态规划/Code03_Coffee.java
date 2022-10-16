@@ -50,12 +50,11 @@ public class Code03_Coffee {
     }
 
     /**
-     *
      * @param drinks 所有杯子可以开始洗的时间
-     * @param wash 单杯洗干净的时间 （串行）
-     * @param air 挥发干净的时间
+     * @param wash   单杯洗干净的时间 （串行）
+     * @param air    挥发干净的时间
      * @param index
-     * @param free 洗的机器什么时候可用
+     * @param free   洗的机器什么时候可用
      * @return drinks[index......]都变干净，最早的结束时间 （返回）
      */
     public static int bestTime(int[] drinks, int wash, int air, int index, int free) {
@@ -63,11 +62,11 @@ public class Code03_Coffee {
             return 0;
         }
         int selfClean1 = Math.max(drinks[index], free) + wash;
-        int restClean1 = bestTime(drinks, wash, air, index+1, selfClean1);
+        int restClean1 = bestTime(drinks, wash, air, index + 1, selfClean1);
         int p1 = Math.max(selfClean1, restClean1);
 
         int selfClean2 = drinks[index] + air;
-        int restClean2 = bestTime(drinks, wash, air, index+1, free);
+        int restClean2 = bestTime(drinks, wash, air, index + 1, free);
         int p2 = Math.max(selfClean2, restClean2);
 
         return Math.min(p1, p2);
@@ -83,6 +82,21 @@ public class Code03_Coffee {
 
         int[][] dp = new int[N + 1][maxFree + 1];
 
+        for (int index = N - 1; index >= 0; index--) {
+            for (int free = 0; free <= maxFree; free++) {
+                int selfClean1 = Math.max(drinks[index], free) + wash;
+                if (selfClean1 > maxFree) {
+                    continue;
+                }
+                int restClean1 = dp[index + 1][selfClean1];
+                int p1 = Math.max(selfClean1, restClean1);
+
+                int selfClean2 = drinks[index] + air;
+                int restClean2 = dp[index + 1][free];
+                int p2 = Math.max(selfClean2, restClean2);
+                dp[index][free] = Math.min(p1, p2);
+            }
+        }
 
         return dp[0][0];
     }

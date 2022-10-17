@@ -1,6 +1,54 @@
 package com.左成云.动态规划;
 
 public class Code01_RobotWalk {
+    /**
+     * 假设有排成一行的N个位置，记为1~N, N一定大于或等于2
+     * 开始时机器人在其中的M位置上(M一定是1~N中的一个)
+     * 如果机器人来到1位置，那么下一步只能往右来到2位置
+     * 如果机器人来到N位置，那么下一步只能往左来到N-1位置
+     * 如果机器人来到中间位置，那么下一步可以往左来到N-1位置
+     * 规定机器人必须走k步，最终能来到P位置（P也是1～N中的一个）的方法有多少种
+     * 给定四个参数N,Start,aim,K
+     */
+    public static void main(String[] args) {
+//        System.out.println(way2(5, 2,4,6));
+//        System.out.println(ways2(6, 3, 6, 9));
+        System.out.println(ways3(5, 2,4,6));
+        System.out.println(way4(5, 2, 4, 6));
+    }
+
+    public static int way4(int N, int start, int aim, int k) {
+        return process3(N, start, aim, k);
+    }
+
+    public static int process3(int N, int start, int aim, int k) {
+        if (k == 0) {
+            if (start == aim) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        if (start == 1) {
+            return process3(N, start + 1, aim, k - 1);
+        } else if (start == N) {
+            return process3(N, start - 1, aim, k - 1);
+        } else {
+            return process3(N, start + 1, aim, k - 1) + process3(N, start - 1, aim, k - 1);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     public static int ways1(int N, int start, int aim, int K) {
         return process1(start, K, aim, N);
     }
@@ -104,11 +152,5 @@ public class Code01_RobotWalk {
         }
 
         return dp[start][K];
-    }
-
-    public static void main(String[] args) {
-//        System.out.println(way2(5, 2,4,6));
-//        System.out.println(ways2(6, 3, 6, 9));
-        System.out.println(ways3(5, 2,4,6));
     }
 }

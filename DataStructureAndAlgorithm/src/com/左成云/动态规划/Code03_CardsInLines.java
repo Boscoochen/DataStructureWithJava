@@ -1,5 +1,13 @@
 package com.左成云.动态规划;
 
+/**
+ * 给定一个整型数组arr，代表数值不同的纸牌排成一条线
+ * 玩家A和玩家B依次拿走每张纸牌
+ * 规定玩家A先拿，玩家B后拿
+ * 但是每个玩家每次只能拿走最左或者最右的纸牌
+ * 玩家A和玩家B都绝顶聪明
+ * 请返回最后获胜者的分数
+ */
 public class Code03_CardsInLines {
     public static void main(String[] args) {
 //        int[] arr = {50, 100, 20, 10};
@@ -22,7 +30,37 @@ public class Code03_CardsInLines {
 //        System.out.println(Math.max(first, second));
 //        int[] arr = {7, 4, 16, 15, 1};
         System.out.println(win3(arr));
+        System.out.println(win4(arr));
     }
+
+    public static int win4(int[] arr) {
+        return player2(arr, 0, arr.length - 1);
+    }
+
+    public static int player1(int[] arr, int left, int right) {
+        if (left == right) {
+            return arr[left];
+        }
+        int p1 = arr[left] + player2(arr, left + 1, right);
+        int p2 = arr[right] + player2(arr, left, right - 1);
+
+        return Math.max(p1, p2);
+    }
+
+
+    public static int player2(int[] arr, int left, int right) {
+        if (left == right) {
+            return 0;
+        }
+        int p1 = player1(arr, left + 1, right);
+        int p2 = player1(arr, left, right - 1);
+
+        return Math.min(p1, p2);
+    }
+
+
+
+
 
 
     //先手后手先手后手。。。。。。循环直到只剩下一个数

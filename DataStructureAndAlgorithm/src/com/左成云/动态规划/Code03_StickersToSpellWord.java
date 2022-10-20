@@ -3,6 +3,15 @@ package com.左成云.动态规划;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * 给定一个字符串str，给定一个字符串类型的数组arr，出现的字符都是小写英文
+ * arr每一个字符串，代表一张贴纸，你可以把单个字符剪开使用，目的是拼出str来
+ * 返回需要至少多少张贴纸可以完成这个任务
+ * 例子：str="babac"，arr="ba"，"c"，"abcd"
+ * 至少需要两张贴纸"ba"和"abcd"，因为使用这两张贴纸，把每一个字符单独剪开，含有2个a，2个b，1个c
+ * 是可以拼出str的。所以返回2
+ */
+
 public class Code03_StickersToSpellWord {
     public static void main(String[] args) {
         String[] strArr = {"abc", "bba", "cck"};
@@ -27,6 +36,13 @@ public class Code03_StickersToSpellWord {
 //        int res = process2(stickers, str);
         System.out.println(minSticker3(strArr, str));
     }
+
+
+
+
+
+
+
 
 //    public static int way(String[] strArr, ArrayList str) {
 //        if (str.size() == 0) {

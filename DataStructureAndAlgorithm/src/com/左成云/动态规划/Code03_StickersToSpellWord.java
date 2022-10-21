@@ -85,8 +85,6 @@ public class Code03_StickersToSpellWord {
         int min = Integer.MAX_VALUE;
         for (String first : stickers) {
             String rest = minus(target, first);
-//            System.out.println(rest.toString());
-
             if (rest.length() != target.length()) {
                 min = Math.min(min, process1(stickers, rest));
             }

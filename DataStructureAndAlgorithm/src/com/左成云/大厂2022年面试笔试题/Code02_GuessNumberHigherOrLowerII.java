@@ -13,6 +13,7 @@ package com.左成云.大厂2022年面试笔试题;
 public class Code02_GuessNumberHigherOrLowerII {
     public static void main(String[] args) {
         System.out.println(minGold(10));
+        System.out.println(minGold2(10));
     }
     public static int minGold(int n) {
         int[][] dp = new int[n+1][n+1];
@@ -89,5 +90,24 @@ public class Code02_GuessNumberHigherOrLowerII {
             min = Math.min(min, i + Math.max(zuo(L, i - 1), zuo(i + 1, R)));
         }
         return min;
+    }
+
+    public static int minGold2(int n) {
+        int[][] dp = new int[n+1][n+1];
+
+        for (int i = 1; i < n; i++) {
+            dp[i][i+1] = i;
+        }
+
+        for (int L = n - 2; L >= 1; L--) {
+            for (int R = L + 2; R <= n; R++) {
+                int min = Math.min(L + dp[L + 1][R], R + dp[L][R - 1]);
+                for (int i = L + 1; i < R; i++) {
+                    min = Math.min(min, i + Math.max(dp[L][i - 1], dp[i + 1][R]));
+                }
+                dp[L][R] = min;
+            }
+        }
+        return dp[1][n];
     }
 }

@@ -2,7 +2,9 @@ package com.左成云.基础提升_有序表_并查表;
 
 public class KMP {
     public static void main(String[] args) {
-
+        String str1 = "acbc";
+        String str2 = "bcc";
+        System.out.println(getIndexOf(str1, str2));
     }
 
     public static int getIndexOf(String s, String m) {
@@ -30,7 +32,22 @@ public class KMP {
 
     public static int[] getNextArray(char[] ms) {
         if (ms.length == 1) {
-
+            return new int[]{-1};
         }
+        int[] next = new int[ms.length];
+        next[0] = -1;
+        next[1] = 0;
+        int i = 2;
+        int cn = 0;
+        while (i < ms.length) {
+            if (ms[i - 1] == ms[cn]) {
+                next[i++] = ++cn;
+            } else if (cn > 0) {
+                cn = next[cn];
+            } else {
+                next[i++] = 0;
+            }
+        }
+        return next;
     }
 }

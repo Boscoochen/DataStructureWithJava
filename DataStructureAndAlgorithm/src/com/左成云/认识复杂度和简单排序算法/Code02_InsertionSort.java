@@ -22,4 +22,5 @@ public class Code02_InsertionSort {
         nums[j] ^= nums[i];
         nums[i] ^= nums[j];
     }
+
 }
